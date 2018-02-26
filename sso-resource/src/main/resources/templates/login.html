@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <script src="../static/jquery.js"></script>
+
+    <script>
+        function login() {
+            $.ajax({
+                url: '/resource/login',
+                type: 'POST',
+                dataType: 'json',
+                data: {userName: $("#userName").val(), password: $("#password").val()},
+                success: function (data) {
+                    console.log(data);
+
+                    var uid = data.data.uid;
+                    setCookie("uid", uid, 60 * 60 * 1000);
+
+                }
+            })
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            console.log(cname + '/' + cvalue + '/' + exdays)
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + escape(cvalue) + "; " + expires;
+            console.log(document.cookie);
+        }
+    </script>
+</head>
+
+
+<body>
+<center>
+    <h2>图书系统登录</h2>
+
+    <div style="width:500px;height:300px;background-color: lavender">
+
+        <span>用户名：<input type="text" name="userName" id="userName"/></span>
+        <span>密码：<input type="password" name="password" id="password"/></span>
+        <button id="login" onclick="javascript:login()">登录</button>
+
+    </div>
+
+</center>
+</body>
+</html>

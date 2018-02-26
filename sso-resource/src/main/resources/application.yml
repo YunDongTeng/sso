@@ -1,0 +1,25 @@
+spring:
+  thymeleaf:
+    cache: false
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+  mvc:
+    static-path-pattern: /static/**
+
+###### redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-wait: 100
+      max-active: 10
+      max-idle: 5
+      max-total: 30
+      timeout: 1000
+server:
+  port: 8083
+

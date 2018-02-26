@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.user.dao.UserDao">
+
+    <resultMap id="UserMap" type="com.user.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="userName"/>
+        <result column="password" property="password"/>
+        <result property="salt" column="salt"/>
+        <result property="phone" javaType="String" column="phone" jdbcType="BIGINT"/>
+        <result property="email" column="email"/>
+        <result property="lastLogin" column="last_login"/>
+    </resultMap>
+
+    <select id="getUserByName" parameterType="String" resultMap="UserMap">
+        select id,username,password,salt,phone,email,last_login from tb_user where username = #{userName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.user.entity.User">
+        insert into tb_user(id,username,password,salt,phone,email,last_login) values (#{id},#{userName},#{password},#{salt},#{phone},#{email},#{lastLogin})
+    </insert>
+
+</mapper>
